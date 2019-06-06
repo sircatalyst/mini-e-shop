@@ -1,32 +1,37 @@
 const UserAuth = require('../../api/auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const errors = require('restify-errors');
 const Router = require('restify-router').Router;
 const usersRoutes = new  Router();
 
+const Users = require('../models/users');
+
 usersRoutes.post('/register',  (req, res, next) => {
     var data = {  
-        firstName: 'tope',
-        lastName: 'bamidele',
-        email: 'temibami@gmail.com',
-        password: '123456789'
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
     }
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(data.password, salt, async(err, hash) => {
             // hash password
             data.password = hash;
-            // save user
             try {
-                // Users.forge(data).save().then(function(u) {  
-                //     console.log('User saved:', u.get('firstName'));
-                // });
+                // save user
                 const newUser = await Users.forge(data).save();
                 console.log(newUser);
-                res.send(201);
+                // res.json(201);
+                res.send(201, {
+                        status: 'success',
+                        data: newUser
+                    }
+                );
                 next();
             } catch (error) {
-                return next( new errors.InternalError(err.message));
+                return next( new errors.InternalError(error.message));
             }
         });
     });
