@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
         table.string('lastName').notNullable();
         table.string('email').notNullable();
         table.string('password').notNullable();
-        table.datetime('created_at').notNullable();
-        table.datetime('updated_at').notNullable();
+        //to create update_at and created_at
+        table.timestamps();
     });
 };
 
