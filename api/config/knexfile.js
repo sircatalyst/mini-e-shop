@@ -1,14 +1,13 @@
 // Update with your config settings.
 
 module.exports = {
-
   development: {
-    client: 'mysql',
+    client: process.env.CLIENT,
     connection: {
-      host : '127.0.0.1',
-      database: 'mini_e_shop',
-      user: 'root',
-      password: ''
+      host : process.env.HOST,
+      database: process.env.DATABASE,
+      user: process.env.USER,
+      password: process.env.PASSWORD
     }
-  },
+  }
 };

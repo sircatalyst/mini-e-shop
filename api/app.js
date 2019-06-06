@@ -1,5 +1,6 @@
 const restify = require('restify');
 const rjwt = require('restify-jwt-community');
+require('dotenv').config();
 
 // import users routes
 const usersRoutes = require('./routes/users')
@@ -12,7 +13,7 @@ server.use(restify.plugins.bodyParser());
 usersRoutes.applyRoutes(server);
 
 // protect routes
-server.use(rjwt({ secret: 'config.JWT_SECRET'}).unless({path: ['/', '/register']}));
+server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: ['/', '/register', '/auth']}));
 
 const PORT = 1111;
 

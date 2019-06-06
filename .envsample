@@ -1,0 +1,6 @@
+CLIENT=mysql
+HOST=127.0.0.1
+DATABASE=mini_e_shop
+USER=root
+PASSWORD=
+JWT_SECRET=secret

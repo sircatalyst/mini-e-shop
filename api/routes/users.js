@@ -22,8 +22,6 @@ usersRoutes.post('/register',  (req, res, next) => {
             try {
                 // save user
                 const newUser = await Users.forge(data).save();
-                console.log(newUser);
-                // res.json(201);
                 res.send(201, {
                         status: 'success',
                         data: newUser
@@ -39,24 +37,26 @@ usersRoutes.post('/register',  (req, res, next) => {
 
 usersRoutes.post('/auth', (req, res, next) => {
     var data = {  
-        firstName: 'tope',
-        lastName: 'bamidele',
-        email: 'temibami@gmail.com',
-        password: '123456789'
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
     }
     
     UserAuth(data.email, data.password).then(user => {  
         // create jwt
-        const token = jwt.sign(user.toJSON(), '12345', { expiresIn: '15m'});
+        const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, { expiresIn: '60m'});
         const {iat, exp} = jwt.decode(token);
         // respond with token
-        res.send({iat, exp, token});
+        res.send(200, {
+            status: 'success',
+            data: {iat, exp, token}
+        });
         next();
     })
     .catch(err => {
         console.log(err)
     }); 
-
 })
 
 usersRoutes.post('/', (req, res) => {
