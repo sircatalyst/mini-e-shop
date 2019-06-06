@@ -6,6 +6,10 @@ const Users = require('../models/users');
 
 const UsersController = {
 
+    index (req, res, next) {
+        res.send('Hi there, welcome to mini-e-shop');
+    },
+
     register (req, res, next) {
         var data = {  
             firstName: req.body.firstName,
@@ -32,6 +36,7 @@ const UsersController = {
                 }
             });
         });
+        next
     },
     
     login (req, res, next) {
@@ -56,7 +61,20 @@ const UsersController = {
         .catch(err => {
             console.log(err)
         }); 
-    }
+    },
+
+    logout (req, res, next) {
+        delete req.headers.authorization;
+        req.rawHeaders.splice(5, 1)
+        delete req.user;
+        res.send(200, {
+                status: 'success',
+                message: 'You are successfully logged out'
+            }
+        );
+        // res.redirect(301,`${prefix}/`, next);
+        next();
+    },
 };
 
 module.exports = UsersController;
