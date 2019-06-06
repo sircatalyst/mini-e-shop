@@ -1,4 +1,5 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
   development: {
@@ -8,6 +9,6 @@ module.exports = {
       database: process.env.DATABASE,
       user: process.env.USER,
       password: process.env.PASSWORD
-    }
+    },
   }
 };

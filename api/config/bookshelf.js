@@ -2,7 +2,7 @@
 const environment = process.env.NODE_ENV || 'development';
 
 // import connections credentials
-const config = require('./knexfile');
+const config = require('../knexfile');
 
 //variable with connection and environment credentials
 const environmentConfig = config[environment];

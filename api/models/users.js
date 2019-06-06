@@ -5,6 +5,7 @@ var Users = bookshelf.Model.extend({
         hasTimestamps: true,
     },
     {
+        
         verifyPassword: function(password) {
             return this.get('password') === password;
         },
