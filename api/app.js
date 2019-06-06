@@ -13,7 +13,7 @@ server.use(restify.plugins.bodyParser());
 usersRoutes.applyRoutes(server);
 
 // protect routes
-server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: ['/', '/register', '/auth']}));
+server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: ['/', '/register', '/login']}));
 
 const PORT = 1111;
 
