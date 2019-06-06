@@ -3,21 +3,23 @@ const rjwt = require('restify-jwt-community');
 require('dotenv').config();
 
 // import users routes
-const usersRoutes = require('./routes/users')
+const indexRoutes = require('./routes/index')
 
 const server = restify.createServer();
 
 // middleware
 server.use(restify.plugins.bodyParser());
 
-usersRoutes.applyRoutes(server);
+indexRoutes.applyRoutes(server);
+
+// create api routes prefix
+const prefix = '/api/v1';
 
 // protect routes
-server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: ['/', '/register', '/login']}));
+server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: [`${prefix}/`, `${prefix}/register`, `${prefix}/login`]}));
 
 const PORT = 1111;
 
 server.listen(PORT, () => {
     console.log(`server running on port ${PORT}`);
 });
-
