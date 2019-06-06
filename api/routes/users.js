@@ -1,4 +1,4 @@
-const UserAuth = require('../../api/auth');
+const UserAuth = require('../config/auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const errors = require('restify-errors');

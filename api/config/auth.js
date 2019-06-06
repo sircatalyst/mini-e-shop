@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const Users = require('../api/models/users');
+const Users = require('../models/users');
 
 const authenticate = (email, password) => {
         return new Promise((resolve, reject) => {

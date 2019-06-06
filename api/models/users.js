@@ -1,4 +1,4 @@
-const bookshelf = require('../knex');
+const bookshelf = require('../config/bookshelf');
 
 var Users = bookshelf.Model.extend({  
         tableName: 'users',
