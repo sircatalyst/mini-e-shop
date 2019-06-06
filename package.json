@@ -1,0 +1,25 @@
+{
+  "name": "mini-e-shop",
+  "version": "1.0.0",
+  "description": "a mini shop api app using restify, knex, bookshelf and joi",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sircatalyst/mini-e-shop.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "restify",
+    "knex",
+    "bookshelf"
+  ],
+  "author": "Temitope Bamidele",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sircatalyst/mini-e-shop/issues"
+  },
+  "homepage": "https://github.com/sircatalyst/mini-e-shop#readme"
+}
