@@ -86,6 +86,31 @@ const CartController = {
             })
         }
     },
+
+    getAllCarts (req, res, next) {
+        Cart.findAll()
+        .then((cart) => {  
+            if(cart){
+                res.send(200, {
+                    status: 'success',
+                    message: cart
+                });
+            }
+            else{
+                res.send(200, {
+                    status: 'success',
+                    message: 'Your cart is empty'
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = CartController;
