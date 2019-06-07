@@ -81,7 +81,6 @@ const OrderController = {
                 });
             }
             else{
-            
                         res.send(200, {
                             status: 'success',
                             message: order
@@ -107,7 +106,7 @@ const OrderController = {
                 });
             }
             else {
-                Order.delete(req.params.id)
+                Order.update(req.params.id, 0)
                 .then((delOrder) => {  
                     if(delOrder){
                         res.send(200, {

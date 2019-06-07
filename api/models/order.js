@@ -5,30 +5,18 @@ var Order = bookshelf.Model.extend({
         hasTimestamps: true,
     },
     {
-        create: function(data, options) {
-            return this.forge(data).save(null, options);
-        },
-
         update: function(id, data) {
             return this.forge().where({id: id}).save(data, {method: 'update'});
-         
         },
 
         findOne: function(id, options) {
-            return this.forge({id: id}).fetch(options);
-        },
-
-        findByName: function(query, options) {
-            return this.forge({name: query}).fetch(options);
+            return this.forge({id: id, ordered: "1"}).fetch(options);
         },
 
         findAll: function(options) {
             return this.forge({ordered: "1"}).fetchAll(options);
         },
 
-        delete: function(id) {
-            return this.forge().where(id).destroy();
-        }
     }
 );
 
