@@ -190,7 +190,44 @@ const ProductController = {
         });
     },
 
+    getOneProduct (req, res, next) {
+        Products.findOne(req.params.id)
+        .then((product) => {  
+            if(!product){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such product',
+                });
+            }
+            else{
+                Products.findOne(req.params.id)
+                .then((product) => {  
+                    if(product){
+                        res.send(200, {
+                            status: 'success',
+                            message: product
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 
+   
 
 }
 
