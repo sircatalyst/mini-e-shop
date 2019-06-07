@@ -181,6 +181,47 @@ const CategoriesController = {
         });
     },
 
+    
+    deleteCategory (req, res, next) {
+        Categories.findOne(req.params.id)
+        .then((category) => {  
+            if(!category){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such category',
+                });
+            }
+            else {
+                const delCategory = category
+                Categories.delete({id: req.params.id})
+                .then((category) => {  
+                    if(category){
+                        res.send(200, {
+                            status: 'success',
+                            message: 'category successfully deleted',
+                            data: delCategory,
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }  
+            next();
+        })
+        .catch(error => {
+            console.log(error)
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = CategoriesController;
