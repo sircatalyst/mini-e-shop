@@ -25,6 +25,12 @@ var Users = bookshelf.Model.extend({
         create: function(data, options) {
             return this.forge(data).save(null, options);
         },
+        update: function(id, data) {
+            return this.forge().where('id', id).update(data, '*');
+        },
+        delete: function(id) {
+            return connection('sticker').where('id', id).del();
+        }
     }
 );
 
