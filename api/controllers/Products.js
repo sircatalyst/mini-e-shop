@@ -1,6 +1,7 @@
 const errors = require('restify-errors');
 const Products = require('../models/products');
 const Categories = require('../models/categories');
+const schemaProducts = require('../validations/schemaProducts');
 const Joi = require('joi');
 
 const ProductController = {
