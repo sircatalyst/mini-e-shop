@@ -148,6 +148,46 @@ const CartController = {
             });
         });
     },
+
+    deleteCart (req, res, next) {
+        Cart.findOne(req.params.id)
+        .then((cart) => {  
+            if(!cart){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such product in your cart',
+                });
+            }
+            else {
+                Cart.delete({id: req.params.id})
+                .then((delCart) => {  
+                    if(delCart){
+                        res.send(200, {
+                            status: 'success',
+                            message: 'Product has been successfully deleted from Cart',
+                            data: cart,
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }  
+            next();
+        })
+        .catch(error => {
+            console.log(error)
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = CartController;
