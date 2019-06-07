@@ -125,7 +125,7 @@ const ProductController = {
             tag: req.body.tag,
         }
 
-        const validData = Joi.validate(data, schemaCategories);
+        const validData = Joi.validate(data, schemaProducts);
 
         if(validData.error != null){
             const err = validData.error.toString().replace(/Error:/, '');
@@ -148,7 +148,7 @@ const ProductController = {
                     next();
                 }
                 else {
-                    Product.findByName(validData.value.name)
+                    Products.findByName(validData.value.name)
                     .then((product) => {  
                         if(product){
                             res.send(401, {
@@ -158,7 +158,7 @@ const ProductController = {
                             next();
                         }
                         else {
-                            Product.update(req.params.id, validData.value)
+                            Products.update(req.params.id, validData.value)
                             .then((product) => {  
                                     res.send(201, {
                                         status: 'success',
