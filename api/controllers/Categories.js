@@ -144,6 +144,43 @@ const CategoriesController = {
         });
     },
 
+    getOneCategory (req, res, next) {
+        Categories.findOne(req.params.id)
+        .then((category) => {  
+            if(!category){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such category',
+                });
+            }
+            else{
+                Categories.findOne(req.params.id)
+                .then((category) => {  
+                    if(category){
+                        res.send(200, {
+                            status: 'success',
+                            message: category
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
+
 }
 
 module.exports = CategoriesController;
