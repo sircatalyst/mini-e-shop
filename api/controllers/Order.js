@@ -1,5 +1,5 @@
 const errors = require('restify-errors');
-const Cart = require('../models/cart');
+const Order = require('../models/order');
 const schemaOrder = require('../validations/schemaOrder');
 const Joi = require('joi');
 
@@ -46,6 +46,30 @@ const OrderController = {
         }
     },
 
+    getAllOrders (req, res, next) {
+        Order.findAll(1)
+        .then((order) => {  
+            if(order){
+                res.send(200, {
+                    status: 'success',
+                    message: order
+                });
+            }
+            else{
+                res.send(200, {
+                    status: 'success',
+                    message: 'Your order is empty'
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = OrderController;
