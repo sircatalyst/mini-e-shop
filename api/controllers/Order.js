@@ -47,7 +47,7 @@ const OrderController = {
     },
 
     getAllOrders (req, res, next) {
-        Order.findAll(1)
+        Order.findAll()
         .then((order) => {  
             if(order){
                 res.send(200, {
