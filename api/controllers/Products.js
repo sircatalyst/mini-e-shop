@@ -165,7 +165,32 @@ const ProductController = {
         }
     },
 
- 
+    getAllProducts (req, res, next) {
+        Products.findAll()
+        .then((product) => {  
+            if(product){
+                res.send(200, {
+                    status: 'success',
+                    message: product
+                });
+            }
+            else{
+                res.send(200, {
+                    status: 'success',
+                    message: 'product is empty'
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
+
+
 
 }
 
