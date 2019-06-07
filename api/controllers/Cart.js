@@ -111,6 +111,43 @@ const CartController = {
             });
         });
     },
+
+    getOneCart (req, res, next) {
+        Cart.findOne(req.params.id)
+        .then((cart) => {  
+            if(!cart){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such product in your cart',
+                });
+            }
+            else{
+                Cart.findOne(req.params.id)
+                .then((cart) => {  
+                    if(cart){
+                        res.send(200, {
+                            status: 'success',
+                            message: cart
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = CartController;
