@@ -96,6 +96,46 @@ const OrderController = {
             });
         });
     },
+
+    deleteOrder (req, res, next) {
+        Order.findOne(req.params.id)
+        .then((order) => {  
+            if(!order){
+                res.send(401, {
+                    status: 'error',
+                    message: 'You do not order such product',
+                });
+            }
+            else {
+                Order.delete(req.params.id)
+                .then((delOrder) => {  
+                    if(delOrder){
+                        res.send(200, {
+                            status: 'success',
+                            message: 'Ordered Product has been successfully deleted but remains in your Cart',
+                            data: order,
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }  
+            next();
+        })
+        .catch(error => {
+            console.log(error)
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = OrderController;
