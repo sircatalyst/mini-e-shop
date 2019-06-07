@@ -70,6 +70,32 @@ const OrderController = {
             });
         });
     },
+
+    getOneOrder (req, res, next) {
+        Order.findOne(req.params.id)
+        .then((order) => {  
+            if(!order){
+                res.send(401, {
+                    status: 'error',
+                    message: 'You do not order such product',
+                });
+            }
+            else{
+            
+                        res.send(200, {
+                            status: 'success',
+                            message: order
+                        });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 }
 
 module.exports = OrderController;
