@@ -3,8 +3,7 @@ const rjwt = require('restify-jwt-community');
 require('dotenv').config();
 
 // import users routes
-const indexRoutes = require('./routes/index');
-
+const indexRoutes = require('./routes/index')
 
 const server = restify.createServer();
 
@@ -12,7 +11,6 @@ const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
 indexRoutes.applyRoutes(server);
-
 
 // create api routes prefix
 const prefix = '/api/v1';
