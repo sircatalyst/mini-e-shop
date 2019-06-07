@@ -227,7 +227,45 @@ const ProductController = {
         });
     },
 
-   
+    deleteProduct (req, res, next) {
+        Products.findOne(req.params.id)
+        .then((product) => {  
+            if(!product){
+                res.send(401, {
+                    status: 'error',
+                    message: 'No such product',
+                });
+            }
+            else {
+                Products.delete({id: req.params.id})
+                .then((deleteProduct) => {  
+                    if(deleteProduct){
+                        res.send(200, {
+                            status: 'success',
+                            message: 'product successfully deleted',
+                            data: product,
+                        });
+                    }
+                })
+                .catch(error => {
+                    res.send(500, {
+                        status: 'error',
+                        message: 'Server error',
+                        error: error
+                    });
+                });
+            }  
+            next();
+        })
+        .catch(error => {
+            console.log(error)
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
 
 }
 
