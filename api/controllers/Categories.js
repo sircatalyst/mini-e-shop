@@ -118,6 +118,32 @@ const CategoriesController = {
             })
         }
     },
+
+    getAllCategories (req, res, next) {
+        Categories.findAll()
+        .then((category) => {  
+            if(category){
+                res.send(200, {
+                    status: 'success',
+                    message: category
+                });
+            }
+            else{
+                res.send(200, {
+                    status: 'success',
+                    message: 'category is empty'
+                });
+            }
+        })
+        .catch(error => {
+            res.send(500, {
+                status: 'error',
+                message: 'Server error',
+                error: error
+            });
+        });
+    },
+
 }
 
 module.exports = CategoriesController;
