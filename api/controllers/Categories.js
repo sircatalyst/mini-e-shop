@@ -181,7 +181,6 @@ const CategoriesController = {
         });
     },
 
-    
     deleteCategory (req, res, next) {
         Categories.findOne(req.params.id)
         .then((category) => {  

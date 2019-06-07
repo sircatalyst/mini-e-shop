@@ -4,6 +4,7 @@ require('dotenv').config();
 
 // import users routes
 const indexRoutes = require('./routes/index')
+const categoryRoutes = require('./routes/category');
 
 const server = restify.createServer();
 
@@ -11,6 +12,7 @@ const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
 indexRoutes.applyRoutes(server);
+categoryRoutes.applyRoutes(server);
 
 // create api routes prefix
 const prefix = '/api/v1';
