@@ -10,11 +10,12 @@ var Categories = bookshelf.Model.extend({
         },
 
         update: function(id, data) {
-            return this.forge().where('id', id).update(data, '*');
+            return this.forge().where({id: id}).save(data, {method: 'update'});
+         
         },
 
-        findOne: function(query, options) {
-            return this.forge(query).fetch(options);
+        findOne: function(id, options) {
+            return this.forge({id: id}).fetch(options);
         },
 
         findByName: function(query, options) {

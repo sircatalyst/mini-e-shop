@@ -91,7 +91,7 @@ const CategoriesController = {
                     next();
                 }
                 else {
-                    Categories.create(validData.value)
+                    Categories.update(req.params.id, validData.value)
                     .then((category) => {  
                             res.send(201, {
                                 status: 'success',
@@ -101,18 +101,20 @@ const CategoriesController = {
                         next();
                     })
                     .catch(error => {
+                        console.log(error)
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error',
+                            message: 'Server error1',
                             error: error
                         });
                     });
                 }
             })
             .catch(error => {
+                console.log(error)
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error',
+                    message: 'Server error2',
                     error: error
                 });
             })
@@ -191,14 +193,13 @@ const CategoriesController = {
                 });
             }
             else {
-                const delCategory = category
                 Categories.delete({id: req.params.id})
-                .then((category) => {  
-                    if(category){
+                .then((delCategory) => {  
+                    if(delCategory){
                         res.send(200, {
                             status: 'success',
                             message: 'category successfully deleted',
-                            data: delCategory,
+                            data: category,
                         });
                     }
                 })

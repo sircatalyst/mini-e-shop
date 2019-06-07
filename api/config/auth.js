@@ -27,7 +27,7 @@ const authenticate = (email, password, req, res) => {
                     })
             })
             .catch (error => {
-                console.log(error)
+                // console.log(error)
                 // email not found
                 // reject('Authentication failed')
                 res.send(401, {
