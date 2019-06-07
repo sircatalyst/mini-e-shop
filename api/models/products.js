@@ -1,7 +1,7 @@
 const bookshelf = require('../config/bookshelf');
 
 var Products = bookshelf.Model.extend({  
-        tableName: 'products',
+        tableName: 'product',
         hasTimestamps: true,
     },
     {
@@ -16,6 +16,10 @@ var Products = bookshelf.Model.extend({
 
         findOne: function(id, options) {
             return this.forge({id: id}).fetch(options);
+        },
+
+        findOneWhereSameInCategories: function(id, options) {
+            return this.forge({id: id}).where({id: id}).fetch(options);
         },
 
         findByName: function(query, options) {

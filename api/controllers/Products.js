@@ -17,7 +17,7 @@ const ProductController = {
         const validData = Joi.validate(data, schemaProducts);
 
         if(validData.error != null){
-            const err = validData.error.toString().replace(/Error:/, '');
+            const err = validData.error.toString().replace(/Error: /, '');
             res.send(422, {
                 status: 'error',
                 message: 'Invalid request data',
@@ -37,18 +37,50 @@ const ProductController = {
                     next();
                 }
                 else{
+                    // console.log(validData.value.name)
                     Products.findByName(validData.value.name)
                     .then((product) => {  
-                        if(product != null){
-                            res.send(401, {
-                                status: 'error',
-                                message: 'Category already exist',
+                        if(product){
+                            Categories.findByName(product.get('name'))
+                            .then((same) => { 
+                                console.log('hi')
+                                if(same == product.name){
+                                    res.send(401, {
+                                        status: 'error',
+                                        message: 'Product name already exist',
+                                    });
+                                    next();
+                                }
+                                else {
+                                    Products.create(validData.value)
+                                    .then((product) => {  
+                                            res.send(201, {
+                                                status: 'success',
+                                                data: product
+                                            }
+                                        );
+                                        next();
+                                    })
+                                    .catch(error => {
+                                        res.send(500, {
+                                            status: 'error',
+                                            message: 'Server error3',
+                                            error: error
+                                        });
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                res.send(500, {
+                                    status: 'error',
+                                    message: 'Server error',
+                                    error: error
+                                });
                             });
-                            next();
                         }
                         else {
                             Products.create(validData.value)
-                            .then((category) => {  
+                            .then((product) => {  
                                     res.send(201, {
                                         status: 'success',
                                         data: product
@@ -59,16 +91,17 @@ const ProductController = {
                             .catch(error => {
                                 res.send(500, {
                                     status: 'error',
-                                    message: 'Server error',
+                                    message: 'Server error3',
                                     error: error
                                 });
                             });
                         }
                     })
                     .catch(error => {
+                        console.log(error)
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error',
+                            message: 'Server error2',
                             error: error
                         });
                     })
@@ -77,7 +110,7 @@ const ProductController = {
             .catch(error => {
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error',
+                    message: 'Server error1',
                     error: error
                 });
             })
