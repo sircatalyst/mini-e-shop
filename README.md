@@ -19,7 +19,7 @@ Globally installed knex node module (`npm i -g knex`)
 Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 ## Getting Started
-1. Clone/Fork app. In your terminal run `git clone https://github.com/sircatalyst/mini-e-shop.git`
+1. Clone/Fork the master branch of this repo. In your terminal run `git clone https://github.com/sircatalyst/mini-e-shop.git`
 
 2. CD (change directory) into the app folder by running `cd mini-e-shop`.
 
@@ -41,56 +41,56 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 ## Routes
 ### users
-    post /api/v1/adminRegister 
+    post /api/v1/adminRegister        Available to Admin
 
-    post /api/v1/register 
+    post /api/v1/register             Available to the public/Users
 
-    post /api/v1/login
+    post /api/v1/login                Accessible to only Admin/Users
 
-    get /api/v1/logout
+    get /api/v1/logout                Accessible to only Admin/Users
 
 ### categories
 
-    post /api/v1/categories
+    post /api/v1/categories           Accessible to only Admin
 
-    put /api/v1/categories/:id
+    put /api/v1/categories/:id        Accessible to only Admin
 
-    get /api/v1/categories
+    get /api/v1/categories            Accessible to only Admin
 
-    get /api/v1/categories/:id
+    get /api/v1/categories/:id        Accessible to only Admin
 
-    delete /api/v1/categories/:id
+    delete /api/v1/categories/:id     Accessible to only Admin
   
 ### products
 
-    post /api/v1/products
+    post /api/v1/products             Accessible to only Admin
 
-    put /api/v1/products/:id
+    put /api/v1/products/:id          Accessible to only Admin
 
-    get /api/v1/products
+    get /api/v1/products              Accessible to only Admin/Users
 
-    get /api/v1/products/:id
+    get /api/v1/products/:id          Accessible to only Admin/Users
 
-    del /api/v1/products/:id
+    del /api/v1/products/:id          Accessible to only Admin
     
 ### cart
 
-    post /api/v1/cart 
+    post /api/v1/cart                 Accessible to only Users
 
-    put /api/v1/cart/:id 
+    put /api/v1/cart/:id              Accessible to only Admin/Users
 
-    get /api/v1/cart 
+    get /api/v1/cart                  Accessible to only Admin/Users
 
-    get /api/v1/cart/:id 
+    get /api/v1/cart/:id              Accessible to only Admin/Users
 
-    del /api/v1/cart/:id 
+    del /api/v1/cart/:id              Accessible to only Admin/Users
      
 ### orders 
 
-    get /api/v1/order  
+    get /api/v1/order                 Accessible to only Admin/Users
 
-    get /api/v1/order/:id 
+    get /api/v1/order/:id             Accessible to only Admin/Users
     
-    put /api/v1/order/:id
+    put /api/v1/order/:id             Accessible to only Admin/Users
 
-    del /api/v1/order/:id 
+    del /api/v1/order/:id             Accessible to only Admin/Users
