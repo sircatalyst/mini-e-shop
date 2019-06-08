@@ -1,4 +1,3 @@
-const errors = require('restify-errors');
 const Products = require('../models/products');
 const Categories = require('../models/categories');
 const schemaProducts = require('../validations/schemaProducts');
@@ -29,23 +28,20 @@ const ProductController = {
             Categories.findOne(validData.value.categories_id)
             .then(category => {
                 if(!category) {
-                    res.send(422, {
+                    res.send(400, {
                         status: 'error',
-                        message: 'Invalid category',
-                        error: err,
+                        message: 'Invalid category.',
                     });
                     next();
                 }
                 else{
-                    // console.log(validData.value.name)
                     Products.findByName(validData.value.name)
                     .then((product) => {  
                         if(product){
                             Categories.findByName(product.get('name'))
                             .then((same) => { 
-                                console.log('hi')
                                 if(same == product.name){
-                                    res.send(401, {
+                                    res.send(400, {
                                         status: 'error',
                                         message: 'Product name already exist',
                                     });
@@ -64,7 +60,7 @@ const ProductController = {
                                     .catch(error => {
                                         res.send(500, {
                                             status: 'error',
-                                            message: 'Server error3',
+                                            message: 'Server error1',
                                             error: error
                                         });
                                     });
@@ -73,7 +69,7 @@ const ProductController = {
                             .catch(error => {
                                 res.send(500, {
                                     status: 'error',
-                                    message: 'Server error',
+                                    message: 'Server error2',
                                     error: error
                                 });
                             });
@@ -98,10 +94,9 @@ const ProductController = {
                         }
                     })
                     .catch(error => {
-                        console.log(error)
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error2',
+                            message: 'Server error4',
                             error: error
                         });
                     })
@@ -110,7 +105,7 @@ const ProductController = {
             .catch(error => {
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error1',
+                    message: 'Server error5',
                     error: error
                 });
             })
@@ -140,10 +135,9 @@ const ProductController = {
             Categories.findOne(validData.value.categories_id)
             .then(category => {
                 if(!category) {
-                    res.send(422, {
+                    res.send(400, {
                         status: 'error',
                         message: 'Invalid category',
-                        error: err,
                     });
                     next();
                 }
@@ -151,7 +145,7 @@ const ProductController = {
                     Products.findByName(validData.value.name)
                     .then((product) => {  
                         if(product){
-                            res.send(401, {
+                            res.send(400, {
                                 status: 'error',
                                 message: 'Product already exist',
                             });
@@ -168,7 +162,6 @@ const ProductController = {
                                 next();
                             })
                             .catch(error => {
-                                console.log(error)
                                 res.send(500, {
                                     status: 'error',
                                     message: 'Server error1',
@@ -178,7 +171,6 @@ const ProductController = {
                         }
                     })
                     .catch(error => {
-                        console.log(error)
                         res.send(500, {
                             status: 'error',
                             message: 'Server error2',
@@ -188,10 +180,9 @@ const ProductController = {
                 }
             })
             .catch(error => {
-                console.log(error)
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error2',
+                    message: 'Server error3',
                     error: error
                 });
             })
@@ -210,7 +201,7 @@ const ProductController = {
             else{
                 res.send(200, {
                     status: 'success',
-                    message: 'product is empty'
+                    message: 'Product is empty'
                 });
             }
         })
@@ -227,27 +218,15 @@ const ProductController = {
         Products.findOne(req.params.id)
         .then((product) => {  
             if(!product){
-                res.send(401, {
+                res.send(400, {
                     status: 'error',
                     message: 'No such product',
                 });
             }
             else{
-                Products.findOne(req.params.id)
-                .then((product) => {  
-                    if(product){
-                        res.send(200, {
-                            status: 'success',
-                            message: product
-                        });
-                    }
-                })
-                .catch(error => {
-                    res.send(500, {
-                        status: 'error',
-                        message: 'Server error',
-                        error: error
-                    });
+                res.send(200, {
+                    status: 'success',
+                    message: product
                 });
             }
         })
@@ -264,34 +243,21 @@ const ProductController = {
         Products.findOne(req.params.id)
         .then((product) => {  
             if(!product){
-                res.send(401, {
+                res.send(400, {
                     status: 'error',
-                    message: 'No such product',
+                    message: 'Invalid Request.No such product',
                 });
             }
             else {
-                Products.delete({id: req.params.id})
-                .then((deleteProduct) => {  
-                    if(deleteProduct){
-                        res.send(200, {
-                            status: 'success',
-                            message: 'product successfully deleted',
-                            data: product,
-                        });
-                    }
-                })
-                .catch(error => {
-                    res.send(500, {
-                        status: 'error',
-                        message: 'Server error',
-                        error: error
-                    });
+                res.send(200, {
+                    status: 'success',
+                    message: 'product successfully deleted',
+                    data: product
                 });
             }  
             next();
         })
         .catch(error => {
-            console.log(error)
             res.send(500, {
                 status: 'error',
                 message: 'Server error',
