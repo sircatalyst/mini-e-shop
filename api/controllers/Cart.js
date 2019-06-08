@@ -32,12 +32,12 @@ const CartController = {
             next();
         }
         else {
-            Products.findOne(validData.value.product_id)
+            Products.findOne(validData.value.product_id, req.user.id)
             .then(product => {
                 if(!product) {
-                    res.send(422, {
+                    res.send(400, {
                         status: 'error',
-                        message: 'Invalid product id. No such product',
+                        message: 'Invalid product id.',
                     });
                     next();
                 }
@@ -53,7 +53,7 @@ const CartController = {
                     .catch(error => {
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error',
+                            message: 'Server error1',
                             error: error
                         });
                     })
@@ -62,7 +62,7 @@ const CartController = {
             .catch(error => {
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error',
+                    message: 'Server error2',
                     error: error
                 });
             })
@@ -100,12 +100,12 @@ const CartController = {
                 if(!product) {
                     res.send(422, {
                         status: 'error',
-                        message: 'Invalid product id. No such product',
+                        message: 'Invalid product id.',
                     });
                     next();
                 }
                 else {
-                    Cart.update(req.params.id, validData.value)
+                    Cart.update(req.params.id, req.user.id, validData.value)
                     .then((cart) => {  
                         res.send(201, {
                             status: 'success',
@@ -116,7 +116,7 @@ const CartController = {
                     .catch(error => {
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error',
+                            message: 'Server error1',
                             error: error
                         });
                     })
@@ -124,8 +124,8 @@ const CartController = {
             })
             .catch(error => {
                 res.send(500, {
-                    status: 'error1',
-                    message: 'Server error',
+                    status: 'error',
+                    message: 'Server error2',
                     error: error
                 });
             })
@@ -133,7 +133,7 @@ const CartController = {
     },
 
     getAllCarts (req, res, next) {
-        Cart.findAll()
+        Cart.findAll(rer.user.id)
         .then((cart) => {  
             if(cart){
                 res.send(200, {
@@ -158,30 +158,18 @@ const CartController = {
     },
 
     getOneCart (req, res, next) {
-        Cart.findOne(req.params.id)
+        Cart.findOne(req.params.id, req.user.id)
         .then((cart) => {  
             if(!cart){
-                res.send(401, {
+                res.send(400, {
                     status: 'error',
                     message: 'No such product in your cart',
                 });
             }
             else{
-                Cart.findOne(req.params.id)
-                .then((cart) => {  
-                    if(cart){
-                        res.send(200, {
-                            status: 'success',
-                            message: cart
-                        });
-                    }
-                })
-                .catch(error => {
-                    res.send(500, {
-                        status: 'error',
-                        message: 'Server error',
-                        error: error
-                    });
+                res.send(200, {
+                    status: 'success',
+                    message: cart
                 });
             }
         })
@@ -195,16 +183,16 @@ const CartController = {
     },
 
     deleteCart (req, res, next) {
-        Cart.findOne(req.params.id)
+        Cart.findOne(req.params.id, req.user.id)
         .then((cart) => {  
             if(!cart){
-                res.send(401, {
+                res.send(400, {
                     status: 'error',
                     message: 'No such product in your cart',
                 });
             }
             else {
-                Cart.delete({id: req.params.id})
+                Cart.delete(req.params.id, req.user.id)
                 .then((delCart) => {  
                     if(delCart){
                         res.send(200, {
@@ -217,7 +205,7 @@ const CartController = {
                 .catch(error => {
                     res.send(500, {
                         status: 'error',
-                        message: 'Server error',
+                        message: 'Server error1',
                         error: error
                     });
                 });
@@ -225,10 +213,9 @@ const CartController = {
             next();
         })
         .catch(error => {
-            console.log(error)
             res.send(500, {
                 status: 'error',
-                message: 'Server error',
+                message: 'Server error2',
                 error: error
             });
         });

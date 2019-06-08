@@ -9,25 +9,24 @@ var Cart = bookshelf.Model.extend({
             return this.forge(data).save(null, options);
         },
 
-        update: function(id, data) {
-            return this.forge().where({id: id}).save(data, {method: 'update'});
-         
+        update: function(id, userId, data ) {
+            return this.forge().where({id: id, user_id: userId}).save(data, {method: 'update'});
         },
 
-        findOne: function(id, options) {
-            return this.forge({id: id}).fetch(options);
+        findOne: function(id, userId, options) {
+            return this.forge({id: id, user_id: userId}).fetch(options);
         },
 
         findByName: function(query, options) {
             return this.forge({name: query}).fetch(options);
         },
 
-        findAll: function(options) {
-            return this.forge().fetchAll(options);
+        findAll: function(userId, options) {
+            return this.forge({ordered: "0", user_id: userId}).fetchAll(options);
         },
 
-        delete: function(id) {
-            return this.forge().where(id).destroy();
+        delete: function(id, userId) {
+            return this.forge().where({id: id, user_id: userId}).destroy();
         }
     }
 );
