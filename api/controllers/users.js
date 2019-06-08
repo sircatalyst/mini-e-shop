@@ -1,7 +1,6 @@
 const UserAuth = require('../config/auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const errors = require('restify-errors');
 const Users = require('../models/users');
 const schemaRegister = require('../validations/schemaRegister');
 const schemaLogin = require('../validations/schemaLogin');
@@ -34,7 +33,7 @@ const UsersController = {
         }
         else {
 
-            Users.forge({email: validData.value.email}).fetch()
+            Users.findByEmail(validData.value.email)
             .then((user) => {  
                 if(user){
                     res.send(400, {
@@ -50,7 +49,7 @@ const UsersController = {
                             try {
                                 delete validData.value.confirmPassword;
                                 // save user
-                                const newUser = await Users.forge(validData.value).save();
+                                const newUser = await Users.create(validData.value);
                                 res.send(201, {
                                         status: 'success',
                                         data: newUser
@@ -58,8 +57,11 @@ const UsersController = {
                                 );
                                 next();
                             } catch (error) {
-                                console.log(error)
-                                return next( new errors.InternalError(error.message));
+                                res.send(500, {
+                                    status: 'error',
+                                    message: 'Server error1',
+                                    error: error
+                                });
                             }
                         });
                     });
@@ -68,7 +70,7 @@ const UsersController = {
             .catch(error => {
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error',
+                    message: 'Server error2',
                     error: error
                 });
             });
@@ -98,7 +100,7 @@ const UsersController = {
         }
         else {
 
-            Users.forge({email: validData.value.email}).fetch()
+            Users.findByEmail(validData.value.email)
             .then((user) => {  
                 if(user){
                     res.send(400, {
@@ -114,7 +116,7 @@ const UsersController = {
                             try {
                                 delete validData.value.confirmPassword;
                                 // save user
-                                const newUser = await Users.forge(validData.value).save();
+                                const newUser = await Users.create(validData.value);
                                 res.send(201, {
                                         status: 'success',
                                         data: newUser
@@ -122,8 +124,11 @@ const UsersController = {
                                 );
                                 next();
                             } catch (error) {
-                                console.log(error)
-                                return next( new errors.InternalError(error.message));
+                                res.send(500, {
+                                    status: 'error',
+                                    message: 'Server error',
+                                    error: error
+                                });
                             }
                         });
                     });

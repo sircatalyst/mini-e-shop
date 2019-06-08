@@ -4,7 +4,7 @@ const Users = require('../models/users');
 const authenticate = (email, password, req, res) => {
         return new Promise((resolve, reject) => {
             // get user by email
-            Users.forge({email: email}).fetch()  
+            Users.findByEmail(email)  
             .then(user => {
                     // match password
                     bcrypt.compare(password, user.get('password'), (err, isMatch) => {
@@ -17,7 +17,7 @@ const authenticate = (email, password, req, res) => {
                         if(isMatch) {
                             resolve(user);
                         } else {
-                            // pass did not match
+                            // password did not match
                             // reject('Oops! Authentication failed')
                             res.send(401, {
                                 status: 'error',
@@ -27,12 +27,12 @@ const authenticate = (email, password, req, res) => {
                     })
             })
             .catch (error => {
-                // console.log(error)
                 // email not found
                 // reject('Authentication failed')
                 res.send(401, {
                     status: 'error',
                     message: 'Oops! Something Wrong! Authentication failed!',
+                    error: error
                 });
             });
         })  
