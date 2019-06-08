@@ -27,16 +27,16 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 4. Create a database name in your running server, you will need to input the database name in your .env file
 
-5. Check .envsample file in the mini-e-shop folder, copy the content and fill it will values appropriate to your environment. This is necessary for your app to run properly
+5. Check .envsample file in the mini-e-shop folder, copy the content, create a .env file, then change the values of the copied contents to appropriate fit your environment. This is necessary for your app to run properly
 
-7. Still in the api directory (../mini-e-shop), in your terminal, run `npm run dev` to run the app.
+6. Still in the mini-e-shop directory (../mini-e-shop), in your terminal, run `npm run dev` to run the app.
   If all goes fine, you show see <b>server running on port 1111</b> in your console
   
-8. In your terminal run `knex migrate:latest` to migrate the tables into your database
+7. In your terminal, open a new tab, CD to mini-e-shop directory (../mini-e-shop), then run `knex migrate:latest` to migrate the app tables into your database
 
-9. THIS IS OPTIONAL: In your terminal, still in the mini-e-shop directory (../mini-e-shop) run `knex seed:run` to migrate sample data into the tables into your database
+8. THIS IS OPTIONAL: In your terminal, still in the mini-e-shop directory (../mini-e-shop) run `knex seed:run` to migrate sample data into the tables into your database
 
-10. In your postman, visit GET `http://localhost:1111/api/v1/`
+9. In your API test tool (Postman), visit GET `http://localhost:1111/api/v1/`
       If all goes well, you should see: <b>"Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi"</b>
 
 ## Routes
