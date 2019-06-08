@@ -23,28 +23,54 @@ const OrderController = {
     },
 
     getAllOrders (req, res, next) {
-        Order.findAll(req.user.id)
-        .then((order) => {  
-            if(order){
-                res.send(200, {
-                    status: 'success',
-                    message: order
+        if (req.user.role === "admin") {
+            Order.findAllAdmin()
+            .then((order) => {  
+                if(order){
+                    res.send(200, {
+                        status: 'success',
+                        message: order
+                    });
+                }
+                else{
+                    res.send(200, {
+                        status: 'success',
+                        message: 'Your order is empty'
+                    });
+                }
+            })
+            .catch(error => {
+                res.send(500, {
+                    status: 'error',
+                    message: 'Server error',
+                    error: error
                 });
-            }
-            else{
-                res.send(200, {
-                    status: 'success',
-                    message: 'Your order is empty'
-                });
-            }
-        })
-        .catch(error => {
-            res.send(500, {
-                status: 'error',
-                message: 'Server error',
-                error: error
             });
-        });
+        }
+        else {
+            Order.findAll(req.user.id)
+            .then((order) => {  
+                if(order){
+                    res.send(200, {
+                        status: 'success',
+                        message: order
+                    });
+                }
+                else{
+                    res.send(200, {
+                        status: 'success',
+                        message: 'Your order is empty'
+                    });
+                }
+            })
+            .catch(error => {
+                res.send(500, {
+                    status: 'error',
+                    message: 'Server error',
+                    error: error
+                });
+            });
+        }
     },
 
     getOneOrder (req, res, next) {

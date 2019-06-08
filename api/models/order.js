@@ -17,6 +17,10 @@ var Order = bookshelf.Model.extend({
             return this.forge({ordered: "1", user_id: userId}).fetchAll(options);
         },
 
+        findAllAdmin: function(options) {
+            return this.forge({ordered: "1"}).fetchAll(options);
+        },
+
     }
 );
 
