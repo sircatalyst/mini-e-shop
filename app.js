@@ -1,7 +1,7 @@
 const restify = require('restify');
 const rjwt = require('restify-jwt-community');
 require('dotenv').config();
-
+ 
 // import users routes
 const indexRoutes = require('./routes/index')
 const categoryRoutes = require('./routes/category');

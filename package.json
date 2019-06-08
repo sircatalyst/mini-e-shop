@@ -4,8 +4,8 @@
   "description": "a mini shop api app using restify, knex, bookshelf and joi",
   "main": "app.js",
   "scripts": {
-    "start": "node api/app.js",
-    "dev": "nodemon api/app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

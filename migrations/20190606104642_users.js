@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
         table.increments();
         table.string('firstName').notNullable();
         table.string('lastName').notNullable();
-        table.string('email').notNullable();
+        table.string('email').notNullable(); 
         table.string('password').notNullable();
         table.string('role').notNullable().defaultTo('user');
         //to create update_at and created_at
