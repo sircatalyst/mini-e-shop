@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
         table.integer('user_id').unsigned().notNullable();
         table.foreign('user_id').references('id').inTable('users');
         table.integer('product_id').unsigned().notNullable();
-        table.foreign('product_id').references('id').inTable('product');
+        table.foreign('product_id').references('id').inTable('products');
         table.string('product_name').notNullable();
         table.string('description').notNullable();
         table.string('price').notNullable();
