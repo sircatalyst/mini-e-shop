@@ -38,8 +38,24 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 9. In your API test tool (Postman), visit GET `http://localhost:1111/api/v1/`
       If all goes well, you should see: <b>"Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi"</b>
-
+      
+10. NOTE: Once your token is generated upon login, copy and paste it in the checked the Authorization section of the Headers of your postman tab. Set the Content-Type to application/json.
+    SAMPLE:
+    
+    Authorization                     jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiVG9
+                                      wZSIsImxhc3ROYW1lIjoiQmFtaWRlbGUiLCJlbWFpbCI6InRlbWliYW1pQGdtYWlsLmNvbSI
+                                      sInBhc3N3b3JkIjoiJDJhJDEwJGw3NTA2eGltMTBLM0lhYlNYcVNpWC5qMjlSdGtyYVoxR2Q
+                                      uQnlZdUNZaXpPaXVnaE1tZ2pDIiwicm9sZSI6InVzZXIiLCJjcmVhdGVkX2F0IjoiMjAxOS0
+                                      i0wOFQyMjo0NjoyNC4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTktMDYtMDhUMjI6NDY6MjQuM
+                                      DAwWiIsImlhdCI6MTU2MDAzNDEzMSwiZXhwIjoxNTYwMDM3NzMxfQ.YvhRVyt0meFSLUM_mX
+                                      
+    Content-Type                      application/json
+                                      
 ## Routes
+
+### index
+    get /api/v1/                      Available to the public
+    
 ### users
     post /api/v1/adminRegister        Available to Admin
 
