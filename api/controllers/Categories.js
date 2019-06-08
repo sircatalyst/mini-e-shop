@@ -1,4 +1,3 @@
-const errors = require('restify-errors');
 const Categories = require('../models/categories');
 const schemaCategories = require('../validations/schemaCategories');
 const Joi = require('joi');
@@ -27,7 +26,7 @@ const CategoriesController = {
             Categories.findByName(validData.value.name)
             .then((category) => {  
                 if(category != null){
-                    res.send(401, {
+                    res.send(400, {
                         status: 'error',
                         message: 'Category already exist',
                     });
@@ -46,7 +45,7 @@ const CategoriesController = {
                     .catch(error => {
                         res.send(500, {
                             status: 'error',
-                            message: 'Server error',
+                            message: 'Server error1',
                             error: error
                         });
                     });
@@ -55,7 +54,7 @@ const CategoriesController = {
             .catch(error => {
                 res.send(500, {
                     status: 'error',
-                    message: 'Server error',
+                    message: 'Server error2',
                     error: error
                 });
             })
@@ -84,7 +83,7 @@ const CategoriesController = {
             Categories.findByName(validData.value.name)
             .then((category) => {  
                 if(category){
-                    res.send(401, {
+                    res.send(400, {
                         status: 'error',
                         message: 'Category already exist',
                     });
@@ -101,7 +100,6 @@ const CategoriesController = {
                         next();
                     })
                     .catch(error => {
-                        console.log(error)
                         res.send(500, {
                             status: 'error',
                             message: 'Server error1',
@@ -111,7 +109,6 @@ const CategoriesController = {
                 }
             })
             .catch(error => {
-                console.log(error)
                 res.send(500, {
                     status: 'error',
                     message: 'Server error2',
@@ -168,7 +165,7 @@ const CategoriesController = {
                 .catch(error => {
                     res.send(500, {
                         status: 'error',
-                        message: 'Server error',
+                        message: 'Server error1',
                         error: error
                     });
                 });
@@ -177,7 +174,7 @@ const CategoriesController = {
         .catch(error => {
             res.send(500, {
                 status: 'error',
-                message: 'Server error',
+                message: 'Server error2',
                 error: error
             });
         });
@@ -187,7 +184,7 @@ const CategoriesController = {
         Categories.findOne(req.params.id)
         .then((category) => {  
             if(!category){
-                res.send(401, {
+                res.send(400, {
                     status: 'error',
                     message: 'No such category',
                 });
@@ -206,7 +203,7 @@ const CategoriesController = {
                 .catch(error => {
                     res.send(500, {
                         status: 'error',
-                        message: 'Server error',
+                        message: 'Server error1',
                         error: error
                     });
                 });
@@ -214,10 +211,9 @@ const CategoriesController = {
             next();
         })
         .catch(error => {
-            console.log(error)
             res.send(500, {
                 status: 'error',
-                message: 'Server error',
+                message: 'Server error2',
                 error: error
             });
         });
