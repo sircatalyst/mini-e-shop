@@ -7,6 +7,7 @@ const schemaCart = Joi.object({
     price: Joi.string().required().trim().error(new Error("price: Product price is required")),
     description: Joi.string().required().trim().error(new Error('description: Product description is required')),
     tag: Joi.string().required().trim().error(new Error('tag: Product tag is required')),
+    ordered: Joi.string().required().trim().error(new Error('ordered: Order status is required')),
 });
 
 module.exports = schemaCart;

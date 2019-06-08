@@ -1,14 +1,18 @@
 const errors = require('restify-errors');
 const Cart = require('../models/cart');
+const Products = require('../models/products');
 const schemaCart = require('../validations/schemaCart');
 const Joi = require('joi');
 
 const CartController = {
 
     addToCart (req, res, next) {
+        const user = req.user.id;
+        const user_id = user.toString();
+
         var data = {  
             name: req.body.name,
-            user_id: req.user.id,
+            user_id: user_id,
             product_id: req.body.product_id,
             description: req.body.description,
             price: req.body.price,
@@ -28,13 +32,32 @@ const CartController = {
             next();
         }
         else {
-            Cart.create(validData.value)
-            .then((cart) => {  
-                res.send(201, {
-                    status: 'success',
-                    data: cart
-                });
-                next();
+            Products.findOne(validData.value.product_id)
+            .then(product => {
+                if(!product) {
+                    res.send(422, {
+                        status: 'error',
+                        message: 'Invalid product id. No such product',
+                    });
+                    next();
+                }
+                else {
+                    Cart.create(validData.value)
+                    .then((cart) => {  
+                        res.send(201, {
+                            status: 'success',
+                            data: cart
+                        });
+                        next();
+                    })
+                    .catch(error => {
+                        res.send(500, {
+                            status: 'error',
+                            message: 'Server error',
+                            error: error
+                        });
+                    })
+                }
             })
             .catch(error => {
                 res.send(500, {
@@ -47,9 +70,12 @@ const CartController = {
     },
 
     editCart (req, res, next) {
+        const user = req.user.id;
+        const user_id = user.toString();
+        
         var data = {  
             name: req.body.name,
-            user_id: req.user.id,
+            user_id: user_id,
             product_id: req.body.product_id,
             description: req.body.description,
             price: req.body.price,
@@ -69,17 +95,36 @@ const CartController = {
             next();
         }
         else {
-            Categories.update(req.params.id, validData.value)
-            .then((cart) => {  
-                res.send(201, {
-                    status: 'success',
-                    data: cart
-                });
-                next();
+            Products.findOne(validData.value.product_id)
+            .then(product => {
+                if(!product) {
+                    res.send(422, {
+                        status: 'error',
+                        message: 'Invalid product id. No such product',
+                    });
+                    next();
+                }
+                else {
+                    Cart.update(req.params.id, validData.value)
+                    .then((cart) => {  
+                        res.send(201, {
+                            status: 'success',
+                            data: cart
+                        });
+                        next();
+                    })
+                    .catch(error => {
+                        res.send(500, {
+                            status: 'error',
+                            message: 'Server error',
+                            error: error
+                        });
+                    })
+                }
             })
             .catch(error => {
                 res.send(500, {
-                    status: 'error',
+                    status: 'error1',
                     message: 'Server error',
                     error: error
                 });
@@ -164,7 +209,7 @@ const CartController = {
                     if(delCart){
                         res.send(200, {
                             status: 'success',
-                            message: 'Product has been successfully deleted from Cart',
+                            message: 'Product has been successfully deleted from your Cart',
                             data: cart,
                         });
                     }

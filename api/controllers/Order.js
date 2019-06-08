@@ -1,11 +1,10 @@
 const errors = require('restify-errors');
 const Order = require('../models/order');
-const schemaOrder = require('../validations/schemaOrder');
 const Joi = require('joi');
 
 const OrderController = {
 
-    order (req, res, next) {
+    orderProduct (req, res, next) {
         var data = {  
             name: req.body.name,
             user_id: req.user.id,
