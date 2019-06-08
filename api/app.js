@@ -24,7 +24,7 @@ orderRoutes.applyRoutes(server);
 const prefix = '/api/v1';
 
 // protect routes
-server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: [`${prefix}/`, `${prefix}/register`, `${prefix}/login`]}));
+server.use(rjwt({ secret: process.env.JWT_SECRET}).unless({path: [`${prefix}/`, `${prefix}/register`, `${prefix}/adminRegister`, `${prefix}/login`]}));
 
 const PORT = 1111;
 

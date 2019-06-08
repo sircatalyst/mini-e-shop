@@ -42,6 +42,28 @@ const UsersController = {
                         message: 'Email already exist',
                     });
                 }
+                else {
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(validData.value.password, salt, async(err, hash) => {
+                            // hash password
+                            validData.value.password = hash;
+                            try {
+                                delete validData.value.confirmPassword;
+                                // save user
+                                const newUser = await Users.forge(validData.value).save();
+                                res.send(201, {
+                                        status: 'success',
+                                        data: newUser
+                                    }
+                                );
+                                next();
+                            } catch (error) {
+                                console.log(error)
+                                return next( new errors.InternalError(error.message));
+                            }
+                        });
+                    });
+                }
             })
             .catch(error => {
                 res.send(500, {
@@ -50,25 +72,70 @@ const UsersController = {
                     error: error
                 });
             });
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(validData.value.password, salt, async(err, hash) => {
-                    // hash password
-                    validData.value.password = hash;
-                    try {
-                        // save user
-                        const newUser = await Users.forge(validData.value).save();
-                        res.send(201, {
-                                status: 'success',
-                                data: newUser
+        }
+
+    },
+
+    adminRegister (req, res, next) {
+        var data = {  
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword,
+            role: "admin" 
+        }
+
+        const validData = Joi.validate(data, schemaRegister);
+
+        if(validData.error != null){
+            const err = validData.error.toString().replace(/Error:/, '');
+            res.send(422, {
+                status: 'error',
+                message: 'Invalid request data',
+                error: err,
+            });
+        }
+        else {
+
+            Users.forge({email: validData.value.email}).fetch()
+            .then((user) => {  
+                if(user){
+                    res.send(400, {
+                        status: 'error',
+                        message: 'Email already exist',
+                    });
+                }
+                else {
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(validData.value.password, salt, async(err, hash) => {
+                            // hash password
+                            validData.value.password = hash;
+                            try {
+                                delete validData.value.confirmPassword;
+                                // save user
+                                const newUser = await Users.forge(validData.value).save();
+                                res.send(201, {
+                                        status: 'success',
+                                        data: newUser
+                                    }
+                                );
+                                next();
+                            } catch (error) {
+                                console.log(error)
+                                return next( new errors.InternalError(error.message));
                             }
-                        );
-                        next();
-                    } catch (error) {
-                        return next( new errors.InternalError(error.message));
-                    }
+                        });
+                    });
+                }
+            })
+            .catch(error => {
+                res.send(500, {
+                    status: 'error',
+                    message: 'Server error',
+                    error: error
                 });
             });
-            next
         }
 
     },

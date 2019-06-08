@@ -7,6 +7,8 @@ const prefix = '/api/v1';
 
 indexRoutes.get(`${prefix}/`, UsersController.index);
 
+indexRoutes.post(`${prefix}/adminRegister`, UsersController.adminRegister);
+
 indexRoutes.post(`${prefix}/register`, UsersController.register);
 
 indexRoutes.post(`${prefix}/login`, UsersController.login);

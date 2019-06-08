@@ -8,6 +8,7 @@ const schemaRegister = Joi.object({
     // accepts alphanumeric strings at least 9 characters long
     password: Joi.string().min(9).alphanum().required().error(new Error('password is required. Must be alphanumeric and minimum of 9 characters')),
     confirmPassword: Joi.string().valid(Joi.ref('password')).required().error(new Error('confirm password is required. Must be the same with password')),
+    role: Joi.string().trim().error(new Error('role')),
 });
 
 module.exports = schemaRegister;
