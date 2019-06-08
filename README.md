@@ -19,13 +19,13 @@ Globally installed knex node module (`npm i -g knex`)
 Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 ## Getting Started
-1. Clone/Fork app .
+1. Clone/Fork app. In your terminal run `git clone https://github.com/sircatalyst/mini-e-shop.git`
 
-2. CD (change directory) into the app folder `cd mini-e-shop`.
+2. CD (change directory) into the app folder by running `cd mini-e-shop`.
 
 3. In your terminal run `npm install` to install the dependencies.
 
-4. Create a database name in your server, you will need to input this name in your .env file
+4. Create a database name in your running server, you will need to input the database name in your .env file
 
 5. Check .envsample file in the mini-e-shop folder, copy the content and fill it will values appropriate to your environment. This is necessary for your app to run properly
 
