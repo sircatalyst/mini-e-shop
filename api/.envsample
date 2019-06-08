@@ -1,6 +1,7 @@
 CLIENT=mysql
-HOST=127.0.0.1
+JWT_SECRET=secret
 DATABASE=mini_e_shop
 USER=root
 PASSWORD=
-JWT_SECRET=secret
+HOST=127.0.0.1
+
