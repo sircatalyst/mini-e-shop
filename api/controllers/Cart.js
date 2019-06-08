@@ -11,12 +11,11 @@ const CartController = {
         const user_id = user.toString();
 
         var data = {  
-            name: req.body.name,
+            product_name: req.body.product_name,
             user_id: user_id,
             product_id: req.body.product_id,
             description: req.body.description,
             price: req.body.price,
-            tag: req.body.tag,
             ordered: "0",
         }
 
@@ -74,12 +73,11 @@ const CartController = {
         const user_id = user.toString();
         
         var data = {  
-            name: req.body.name,
+            product_name: req.body.product_name,
             user_id: user_id,
             product_id: req.body.product_id,
             description: req.body.description,
             price: req.body.price,
-            tag: req.body.tag,
             ordered: "0",
         }
 

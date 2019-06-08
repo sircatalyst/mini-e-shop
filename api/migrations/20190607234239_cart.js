@@ -5,11 +5,10 @@ exports.up = function(knex, Promise) {
         table.foreign('user_id').references('id').inTable('users');
         table.integer('product_id').unsigned().notNullable();
         table.foreign('product_id').references('id').inTable('product');
-        table.string('name').notNullable();
+        table.string('product_name').notNullable();
         table.string('description').notNullable();
         table.string('price').notNullable();
         table.string('ordered').notNullable();
-        table.string('tag').notNullable();
         //to create update_at and created_at
         table.timestamps();
     });  

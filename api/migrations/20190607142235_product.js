@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
         table.foreign('categories_id').references('id').inTable('categories');
         table.string('name').notNullable();
         table.string('description').notNullable();
-        table.string('tag').notNullable();
+        table.string('price').notNullable();
         //to create update_at and created_at
         table.timestamps();
     });  

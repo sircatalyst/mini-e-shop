@@ -17,7 +17,7 @@ const ProductController = {
                 categories_id: req.body.categories_id,
                 name: req.body.name,
                 description: req.body.description,
-                tag: req.body.tag,
+                price: req.body.price,
             }
 
             const validData = Joi.validate(data, schemaProducts);
@@ -132,7 +132,7 @@ const ProductController = {
                 categories_id: req.body.categories_id,
                 name: req.body.name,
                 description: req.body.description,
-                tag: req.body.tag,
+                price: req.body.price,
             }
 
             const validData = Joi.validate(data, schemaProducts);
