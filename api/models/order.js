@@ -5,16 +5,16 @@ var Order = bookshelf.Model.extend({
         hasTimestamps: true,
     },
     {
-        update: function(id, data) {
-            return this.forge().where({id: id}).save(data, {method: 'update'});
+        update: function(id, userId, data ) {
+            return this.forge().where({id: id, user_id: userId}).save(data, {method: 'update'});
         },
 
-        findOne: function(id, options) {
-            return this.forge({id: id, ordered: "1"}).fetch(options);
+        findOne: function(id, userId, options) {
+            return this.forge({id: id, ordered: "1", user_id: userId}).fetch(options);
         },
 
-        findAll: function(options) {
-            return this.forge({ordered: "1"}).fetchAll(options);
+        findAll: function(userId, options) {
+            return this.forge({ordered: "1", user_id: userId}).fetchAll(options);
         },
 
     }

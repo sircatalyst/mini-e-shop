@@ -5,29 +5,10 @@ const Joi = require('joi');
 const OrderController = {
 
     orderProduct (req, res, next) {
-        var data = {  
-            name: req.body.name,
-            user_id: req.user.id,
-            product_id: req.body.product_id,
-            description: req.body.description,
-            price: req.body.price,
-            tag: req.body.tag,
-            ordered: "1", //if 1, the product is ordered
-        }
 
-        const validData = Joi.validate(data, schemaOrder);
+        var data = { ordered: "1" } //if 1, the product is ordered. "0" MEANS it is not ordered
 
-        if(validData.error != null){
-            const err = validData.error.toString().replace(/Error:/, '');
-            res.send(422, {
-                status: 'error',
-                message: 'Invalid request data',
-                error: err,
-            });
-            next();
-        }
-        else {
-            Order.update(req.params.id, validData.value)
+            Order.update(req.params.id, req.user.id, data)
             .then((order) => {  
                 res.send(201, {
                     status: 'success',
@@ -42,11 +23,11 @@ const OrderController = {
                     error: error
                 });
             })
-        }
     },
 
     getAllOrders (req, res, next) {
-        Order.findAll()
+
+        Order.findAll(req.user.id)
         .then((order) => {  
             if(order){
                 res.send(200, {
@@ -71,7 +52,7 @@ const OrderController = {
     },
 
     getOneOrder (req, res, next) {
-        Order.findOne(req.params.id)
+        Order.findOne(req.params.id, req.user.id)
         .then((order) => {  
             if(!order){
                 res.send(401, {
@@ -80,10 +61,10 @@ const OrderController = {
                 });
             }
             else{
-                        res.send(200, {
-                            status: 'success',
-                            message: order
-                        });
+                res.send(200, {
+                    status: 'success',
+                    message: order
+                });
             }
         })
         .catch(error => {
@@ -96,7 +77,7 @@ const OrderController = {
     },
 
     deleteOrder (req, res, next) {
-        Order.findOne(req.params.id)
+        Order.findOne(req.params.id, req.user.id)
         .then((order) => {  
             if(!order){
                 res.send(401, {
@@ -105,7 +86,10 @@ const OrderController = {
                 });
             }
             else {
-                Order.update(req.params.id, 0)
+                data = {
+                    ordered: 0
+                }
+                Order.update(req.params.id, req.user.id, data)
                 .then((delOrder) => {  
                     if(delOrder){
                         res.send(200, {
@@ -116,8 +100,9 @@ const OrderController = {
                     }
                 })
                 .catch(error => {
+                    console.log(error)
                     res.send(500, {
-                        status: 'error',
+                        status: 'error2',
                         message: 'Server error',
                         error: error
                     });

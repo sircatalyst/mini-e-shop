@@ -4,7 +4,7 @@ const OrderController = require('../controllers/order');
 
 const prefix = '/api/v1/order';
 
-orderRoutes.post(`${prefix}`, OrderController.orderProduct);
+orderRoutes.put(`${prefix}/:id`, OrderController.orderProduct);
 
 orderRoutes.get(`${prefix}`, OrderController.getAllOrders);
 
