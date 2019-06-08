@@ -6,10 +6,6 @@ var Users = bookshelf.Model.extend({
     },
     {
         
-        verifyPassword: function(password) {
-            return this.get('password') === password;
-        },
-
         byEmail: function(email) {
             return this.forge().query({where:{ email: email }}).fetch();
         },

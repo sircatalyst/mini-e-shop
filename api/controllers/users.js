@@ -10,7 +10,7 @@ const Joi = require('joi');
 const UsersController = {
 
     index (req, res, next) {
-        res.send('Hi there, welcome to mini-e-shop');
+        res.send('Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi');
     },
 
     register (req, res, next) {
@@ -37,7 +37,7 @@ const UsersController = {
             Users.forge({email: validData.value.email}).fetch()
             .then((user) => {  
                 if(user){
-                    res.send(401, {
+                    res.send(400, {
                         status: 'error',
                         message: 'Email already exist',
                     });
