@@ -39,77 +39,79 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 9. In your API test tool (Postman), visit GET `http://localhost:1111/api/v1/`
       If all goes well, you should see: <b>"Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi"</b>
       
-10. NOTE: Once your token is generated upon login, copy and paste it in the checked the Authorization section of the Headers of your postman tab. Set the Content-Type to application/json.
+10. NOTE: Once your token is generated upon login, add `jwt ` with a whitespace, then copy and paste the generated token in the checked Authorization section of the Headers of your postman tab. Set the Content-Type to application/json.
 
     SAMPLE:
     
-    <b>Authorization</b>                    
-    
-    jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiVG9
-    wZSIsImxhc3ROYW1lIjoiQmFtaWRlbGUiLCJlbWFpbCI6InRlbWliYW1pQGdtYWlsLmNvbSI
-    sInBhc3N3b3JkIjoiJDJhJDEwJGw3NTA2eGltMTBLM0lhYlNYcVNpWC5qMjlSdGtyYVoxR2Q
-    uQnlZdUNZaXpPaXVnaE1tZ2pDIiwicm9sZSI6InVzZXIiLCJjcmVhdGVkX2F0IjoiMjAxOS0
-    i0wOFQyMjo0NjoyNC4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTktMDYtMDhUMjI6NDY6MjQuM
-    DAwWiIsImlhdCI6MTU2MDAzNDEzMSwiZXhwIjoxNTYwMDM3NzMxfQ.YvhRVyt0meFSLUM_mX
+    <b>Authorization</b>   jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoiVG9
+                           wZSIsImxhc3ROYW1lIjoiQmFtaWRlbGUiLCJlbWFpbCI6InRlbWliYW1pQGdtYWlsLmNvbSI
+                           sInBhc3N3b3JkIjoiJDJhJDEwJGw3NTA2eGltMTBLM0lhYlNYcVNpWC5qMjlSdGtyYVoxR2Q
+                           uQnlZdUNZaXpPaXVnaE1tZ2pDIiwicm9sZSI6InVzZXIiLCJjcmVhdGVkX2F0IjoiMjAxOS0
+                           i0wOFQyMjo0NjoyNC4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMTktMDYtMDhUMjI6NDY6MjQuM
+                           DAwWiIsImlhdCI6MTU2MDAzNDEzMSwiZXhwIjoxNTYwMDM3NzMxfQ.YvhRVyt0meFSLUM_mX
                                       
-    <b>Content-Type</b>                      application/json
+    <b>Content-Type</b>    application/json
                                       
-## Routes
+                                      
+##      End Points                     Accessibility                     Function
 
 ### index
-    get /api/v1/                      Available to the public
+    get /api/v1/                      Available to the public            Display homepage
     
 ### users
-    post /api/v1/adminRegister        Available to Admin
+    post /api/v1/adminRegister        Available to Admin                 To register as admin
 
-    post /api/v1/register             Available to the public/Users
+    post /api/v1/register             Available to the public/Users      To register as user
 
-    post /api/v1/login                Accessible to only Admin/Users
+    post /api/v1/login                Accessible to only Admin/Users     To login
 
-    get /api/v1/logout                Accessible to only Admin/Users
+    get /api/v1/logout                Accessible to only Admin/Users     To logout
 
 ### categories
 
-    post /api/v1/categories           Accessible to only Admin
+    post /api/v1/categories           Accessible to only Admin           To add categories
 
-    put /api/v1/categories/:id        Accessible to only Admin
+    put /api/v1/categories/:id        Accessible to only Admin           To edit added category
 
-    get /api/v1/categories            Accessible to only Admin/Users
+    get /api/v1/categories            Accessible to only Admin/Users     To view all added categories
+ 
+    get /api/v1/categories/:id        Accessible to only Admin/Users     To view one added category
 
-    get /api/v1/categories/:id        Accessible to only Admin/Users
-
-    delete /api/v1/categories/:id     Accessible to only Admin
+    delete /api/v1/categories/:id     Accessible to only Admin           To delete one added category
   
 ### products
 
-    post /api/v1/products             Accessible to only Admin
+    post /api/v1/products             Accessible to only Admin         To add a product
 
-    put /api/v1/products/:id          Accessible to only Admin
+    put /api/v1/products/:id          Accessible to only Admin         To edit an added product
 
-    get /api/v1/products              Accessible to only Admin/Users
+    get /api/v1/products              Accessible to only Admin/Users   To view all added products
 
-    get /api/v1/products/:id          Accessible to only Admin/Users
+    get /api/v1/products/:id          Accessible to only Admin/Users   To view one added product
 
-    del /api/v1/products/:id          Accessible to only Admin
+    del /api/v1/products/:id          Accessible to only Admin         To delete one added product
     
-### cart
+### carts
 
-    post /api/v1/cart                 Accessible to only Users
+    post /api/v1/carts                 Accessible to only Users        To add a product to cart
 
-    put /api/v1/cart/:id              Accessible to only Users
+    put /api/v1/carts/:id              Accessible to only Users        To edit an added product
 
-    get /api/v1/cart                  Accessible to only Admin/Users
+    get /api/v1/carts                  Accessible to only Users        To view all added products in cart 
 
-    get /api/v1/cart/:id              Accessible to only Admin/Users
+    get /api/v1/carts/:id              Accessible to only Users        To view one added product in cart 
 
-    del /api/v1/cart/:id              Accessible to only Users
+    del /api/v1/carts/:id              Accessible to only Users        To delete one added product in cart
      
 ### orders 
 
-    get /api/v1/order                 Accessible to only Admin/Users
+    get /api/v1/ordersProduct/id       Accessible to only Users        To order a product in cart
 
-    get /api/v1/order/:id             Accessible to only Admin/Users
-    
-    put /api/v1/order/:id             Accessible to only Admin/Users
+    get /api/v1/orders                 Accessible to only Users        To view all ordered products 
 
-    del /api/v1/order/:id             Accessible to only Admin/Users
+    get /api/v1/adminOrders            Accessible to only Admin        To view all ordered products 
+
+    get /api/v1/orders/:id             Accessible to only Admin/Users  To view one ordered product
+
+    del /api/v1/orders/:id             Accessible to only Users        To delete one ordered products 
+  

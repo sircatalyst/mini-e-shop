@@ -5,8 +5,9 @@ var Order = bookshelf.Model.extend({
         hasTimestamps: true,
     },
     {
-        update: function(id, userId, data ) {
+        update: function(id, userId, data) {
             return this.forge().where({id: id, user_id: userId}).save(data, {method: 'update'});
+         
         },
 
         findOne: function(id, userId, options) {

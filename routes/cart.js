@@ -2,7 +2,7 @@ const Router = require('restify-router').Router;
 const cartRoutes = new Router();
 const CartController = require('../controllers/cart');
 
-const prefix = '/api/v1/cart';
+const prefix = '/api/v1/carts';
 
 cartRoutes.post(`${prefix}`, CartController.addToCart);
 
