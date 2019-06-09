@@ -74,9 +74,9 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
     put /api/v1/categories/:id        Accessible to only Admin
 
-    get /api/v1/categories            Accessible to only Admin
+    get /api/v1/categories            Accessible to only Admin/Users
 
-    get /api/v1/categories/:id        Accessible to only Admin
+    get /api/v1/categories/:id        Accessible to only Admin/Users
 
     delete /api/v1/categories/:id     Accessible to only Admin
   

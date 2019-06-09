@@ -11,7 +11,7 @@ const UsersController = {
     index (req, res, next) {
         res.send(200, {
             status: 'success',
-            message: "Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi"
+            message: "Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf Jsonwebtoken, and Joi"
         });
     },
 
