@@ -19,7 +19,7 @@ Globally installed knex node module (`npm i -g knex`)
 Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 ## To test remotely 
- Please, visit <a target="_blank" href="https://mini-e-shop.herokuapp.com">Mini-e-shop</a>
+ Please, visit <a href="https://mini-e-shop.herokuapp.com" target="_blank">Mini-e-shop</a>
 
 
 ## Getting Started to test locally
