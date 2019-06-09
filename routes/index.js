@@ -5,6 +5,8 @@ const UsersController = require('../controllers/Users');
 // create api routes prefix
 const prefix = '/api/v1';
 
+indexRoutes.get('/', UsersController.index);
+
 indexRoutes.get(`${prefix}/`, UsersController.index);
 
 indexRoutes.post(`${prefix}/adminRegister`, UsersController.adminRegister);
