@@ -24,14 +24,14 @@ const CartController = {
         if(validData.error != null){
             const err = validData.error.toString().replace(/Error:/, '');
             res.send(422, {
-                status: 'error',
+                status: 'error', 
                 message: 'Invalid request data',
                 error: err,
             });
             next();
         }
         else {
-            Products.findOne(validData.value.product_id, req.user.id)
+            Products.findOne(validData.value.product_id)
             .then(product => {
                 if(!product) {
                     res.send(400, {
