@@ -139,18 +139,18 @@ const CartController = {
     },
 
     getAllCarts (req, res, next) {
-        Cart.findAll(rer.user.id)
+        Cart.findAll(req.user.id)
         .then((cart) => {  
-            if(cart){
+            if(cart.length == 0){
                 res.send(200, {
                     status: 'success',
-                    message: cart
+                    message: 'Your cart is empty'
                 });
             }
             else{
                 res.send(200, {
                     status: 'success',
-                    message: 'Your cart is empty'
+                    message: cart
                 });
             }
         })
