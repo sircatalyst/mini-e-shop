@@ -206,13 +206,6 @@ const ProductController = {
     },
 
     getAllProducts (req, res, next) {
-        if (req.user.role !== "admin") {
-            res.send(401, {
-                status: 'error',
-                message: 'Unauthorized request',
-            });
-        }
-        else {
             Products.findAll()
             .then((product) => {  
                 if(product){
@@ -235,17 +228,9 @@ const ProductController = {
                     error: error
                 });
             })
-        }
     },
 
     getOneProduct (req, res, next) {
-        if (req.user.role !== "admin") {
-            res.send(401, {
-                status: 'error',
-                message: 'Unauthorized request',
-            });
-        }
-        else {
             Products.findOne(req.params.id)
             .then((product) => {  
                 if(!product){
@@ -268,7 +253,6 @@ const ProductController = {
                     error: error
                 });
             });
-        }
     },
 
     deleteProduct (req, res, next) {
