@@ -96,13 +96,13 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
     post /api/v1/cart                 Accessible to only Users
 
-    put /api/v1/cart/:id              Accessible to only Admin/Users
+    put /api/v1/cart/:id              Accessible to only Users
 
     get /api/v1/cart                  Accessible to only Admin/Users
 
     get /api/v1/cart/:id              Accessible to only Admin/Users
 
-    del /api/v1/cart/:id              Accessible to only Admin/Users
+    del /api/v1/cart/:id              Accessible to only Users
      
 ### orders 
 
