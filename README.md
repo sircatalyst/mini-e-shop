@@ -18,7 +18,11 @@ A running mysql server
 Globally installed knex node module (`npm i -g knex`)
 Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
-## Getting Started
+## To test remotely 
+ Please, visit <a target="_blank" href="https://mini-e-shop.herokuapp.com">Mini-e-shop</a>
+
+
+## Getting Started to test locally
 1. Clone/Fork the master branch of this repo. In your terminal run `git clone https://github.com/sircatalyst/mini-e-shop.git`
 
 2. CD (change directory) into the app folder by running `cd mini-e-shop`.
