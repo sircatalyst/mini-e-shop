@@ -26,8 +26,8 @@ const prefix = '/api/v1';
 // protect routes
 server.use(rjwt({ secret: "secret"}).unless({path: ['/', `${prefix}/`, `${prefix}/register`, `${prefix}/adminRegister`, `${prefix}/login`]}));
 
-const PORT = 3306;
+const PORT = 1111;
 
-server.listen(PORT, () => {
+server.listen(process.env.PORT || PORT, () => {
     console.log(`server running on port ${PORT}`);
 });
