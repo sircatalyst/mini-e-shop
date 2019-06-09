@@ -135,13 +135,6 @@ const CategoriesController = {
     },
 
     getAllCategories (req, res, next) {
-        if (req.user.role !== "admin") {
-            res.send(401, {
-                status: 'error',
-                message: 'Unauthorized request',
-            });
-        }
-        else{
             Categories.findAll()
             .then((category) => {  
                 if(category){
@@ -164,17 +157,9 @@ const CategoriesController = {
                     error: error
                 });
             });
-        }
     },
 
     getOneCategory (req, res, next) {
-        if (req.user.role !== "admin") {
-            res.send(401, {
-                status: 'error',
-                message: 'Unauthorized request',
-            });
-        }
-        else {
             Categories.findOne(req.params.id)
             .then((category) => {  
                 if(!category){
@@ -209,7 +194,6 @@ const CategoriesController = {
                     error: error
                 });
             });
-        }
     },
 
     deleteCategory (req, res, next) {
