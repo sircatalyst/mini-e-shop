@@ -1,14 +1,14 @@
 // Update with your config settings.
 require('dotenv').config();
- 
+
 module.exports = {  
   development: {
-    client: process.env.CLIENT,
+    client: "mysql",
     connection: {
-      host : process.env.HOST, 
-      database: process.env.DATABASE,
-      user: process.env.USER,
-      password: process.env.PASSWORD
+      host : "remotemysql.com", 
+      database: "ca5DAJXHXI",
+      user: "ca5DAJXHXI",
+      password: "i00yujnORm"
     },
   }
 };
