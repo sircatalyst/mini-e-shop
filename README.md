@@ -36,7 +36,7 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
 
 8. THIS IS OPTIONAL: In your terminal, still in the mini-e-shop directory (../mini-e-shop) run `knex seed:run` to migrate sample data into the tables into your database
 
-9. In your API test tool (Postman), visit GET `http://localhost:1111/api/v1/`
+9. In your API test tool (Postman), visit GET `http://localhost:3306/api/v1/`
       If all goes well, you should see: <b>"Hi there, welcome to mini-e-shop built with Restify, Knex, Bookshelf and Joi"</b>
       
 10. NOTE: Once your token is generated upon login, add `jwt ` with a whitespace, then copy and paste the generated token in the checked Authorization section of the Headers of your postman tab. Set the Content-Type to application/json.
@@ -52,7 +52,7 @@ Ensure nodemon is globally installed on your system `npm i -g nodemon`
                                       
     <b>Content-Type</b>    application/json
                                       
-                                      
+
 ##      End Points                     Accessibility                     Function
 
 ### index

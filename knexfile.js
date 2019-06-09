@@ -8,7 +8,8 @@ module.exports = {
       host : "remotemysql.com", 
       database: "ca5DAJXHXI",
       user: "ca5DAJXHXI",
-      password: "i00yujnORm"
+      password: "i00yujnORm",
+      port: "3306"
     },
   }
 };
