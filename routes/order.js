@@ -1,6 +1,6 @@
 const Router = require('restify-router').Router;
 const orderRoutes = new Router();
-const OrderController = require('../controllers/order');
+const OrderController = require('../controllers/Order');
 
 const prefix = '/api/v1/orders';
 const prefixProducts = '/api/v1/orderProducts';
