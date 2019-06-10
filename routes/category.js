@@ -1,6 +1,6 @@
 const Router = require('restify-router').Router;
 const categoryRoutes = new Router();
-const CategoriesController = require('../controllers/categories');
+const CategoriesController = require('../controllers/Categories');
 
 const prefix = '/api/v1/categories';
 
